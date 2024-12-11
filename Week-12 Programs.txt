@@ -1,0 +1,57 @@
+WEEK-12A (Chi-Square Test)
+
+# Step 1: Creating the observed frequency table
+observed <- matrix(c(20, 15, 15, 25, 15, 10), nrow = 2, byrow = TRUE)
+rownames(observed) <- c("Male", "Female")
+colnames(observed) <- c("Product A", "Product B", "Product C")
+
+# Step 2: Perform the Chi-square test
+chi_square_test <- chisq.test(observed)
+
+# Step 3: Display the results
+print(chi_square_test)
+
+# Step 4: Visualize with a mosaic plot (optional)
+mosaicplot(observed, main = "Mosaic Plot of Gender vs Product Preference", color = TRUE)
+
+
+WEEK-12B(T  Test)
+
+# Step 1: Create the test scores for both groups
+group1 <- c(78, 85, 91, 88, 84, 79, 95)  # Tutored group
+group2 <- c(72, 74, 69, 75, 70, 68, 74)  # Non-tutored group
+
+# Step 2: Create a boxplot for visual comparison (optional)
+boxplot(group1, group2, names = c("Tutored", "Non-Tutored"), 
+        main = "Test Scores Comparison", 
+        ylab = "Test Scores", 
+        col = c("lightblue", "lightgreen"))
+
+# Step 3: Perform the independent two-sample t-test
+t_test_result <- t.test(group1, group2, alternative = "two.sided", var.equal = TRUE)
+
+# Step 4: Display the results of the t-test
+print(t_test_result)
+
+WEEK-12C(T  Test)
+
+# Step 1: Create the data for each department
+department_A <- c(50, 52, 55, 49, 51)
+department_B <- c(60, 62, 64, 58, 61)
+department_C <- c(45, 47, 48, 43, 44)
+
+# Combine the data into a single data frame
+department <- factor(c(rep("A", length(department_A)),
+                       rep("B", length(department_B)),
+                       rep("C", length(department_C))))
+income <- c(department_A, department_B, department_C)
+
+# Create a data frame
+data <- data.frame(department, income)
+
+# Step 2: Perform one-way ANOVA
+anova_result <- aov(income ~ department, data = data)
+
+# Step 3: Display the results of the ANOVA
+summary(anova_result)
+
